@@ -1,7 +1,7 @@
 module.exports = function(config){
   config.set({
 
-    basePath : '../../../../Downloads/material-start-master',
+    basePath : './',
 
     files : [
       'app/bower_components/angular/angular.js',

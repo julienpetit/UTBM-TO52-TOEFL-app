@@ -1,24 +1,12 @@
-# Angular Material-Start
+# Angular Material-Start (Tutorials)
 
-This Material **start*** project is a *seed* for AngularJS Material applications. The project contains a sample AngularJS application and is pre-configured to install the Angular framework and a bunch of development and testing tools for instant web development gratification.
-
-This sample application is intended to be useful as both a learning tool and a skeleton application
-for a typical [AngularJS Material](http://material.angularjs.org/) web app: comprised of a Side navigation
-area and a content area. You can use it to quickly bootstrap your AngularJS webapp projects and dev
-environment for these projects.
-
-### What is the UX?
-
-Below is a snapshot of the Starter-App with the Users' *master-detail* view. Also shown is the user
-experience that will is displayed for smaller device sizes. The responsive layout changes to hide
-the user list, reveal the **menu** button. In the User Details view, you may also click the
-**share** button  to show the Contact &lt;User&gt; bottom sheet view.
-
-<br/>
+This branch contains the tutorial steps and processes used to implement the start-app shown below:
 
 ![material-starter-ux2](https://cloud.githubusercontent.com/assets/210413/6448551/70864488-c0e0-11e4-8767-c4e1e4c2f343.png)
 
-<br/>
+Above is a snaphot of the Starter-App with a **Master-Detail** layout: showing a list of users (left) and a user detail view (right). 
+
+Also shown is the user experience that will be displayed for smaller device sizes. The responsive layout reveals the **menu** button that can be used to hide the user list and a **share** button that can be used to show the Share bottom sheet view.
 
 This Starter app demonstrates how:
 
@@ -28,202 +16,355 @@ This Starter app demonstrates how:
 *  Custom controller can easily, programmatically open & close the SideNav component.
 *  Responsive breakpoints and `$mdMedia` are used
 *  Theming can be altered/configured using `$mdThemingProvider`
-*  ARIA features are supported by Angular Material and warnings can be used to improve accessibility.
 
-### Tutorials
 
-The repository contains both ES5 and ES6 versions of the application. Traditional development with
-ES5 standards and solutions are presented here by default. Tutorials are included: step-by-step
-instructions that clearly demonstrate how the Starter application can be created in minutes.
+This sample application is purposed as both a learning tool and a skeleton application for a typical [AngularJS Material](http://angularjs.org/) web app: comprised of a Side navigation area and a content area. You can use it to quickly bootstrap your angular webapp projects and dev environment for these
+projects.
 
-> These tutorials will be presented live, on-stage at **ng-conf 2015, Utah**.
+<br/>
+- - -
 
-Developers should checkout the following repository branches for:
+#### "How to build an App"
 
-* Branch [**Starter - ES5 Tutorials**](https://github.com/angular/material-start/tree/es5-tutorial):
-for  ES5 Tutorial steps & development process.
-* Branch [**Starter - ES6 Tutorials**](https://github.com/angular/material-start/tree/es6-tutorial):
-for  ES6 Tutorial steps & development process.
-* Branch [**Starter - ES6**](https://github.com/angular/material-start/tree/es6): for example
-implementation of Angular Material 1.x (and Angular 1.x) within an ES6 application.
+Here are some generalized steps that may be used to conceptualize the application implementation process:
 
-> The **README** for the ES6 branches will provide all details showing how easy, <u>more simplifed</u>,
-and <u>more manageable</u> it is to develop ES6 applications with Angular Material 1.x.<br/><br/>
+1. Plan your layout and the components you want to use
+2. Use hard-coded HTML and mock content to make sure the components appear as desired
+3. Wire components to your application logic
+> Use the seamless integration possible with Angular directives and controllers<br/>
+> This integration assumes that you have unit tested your app logic
+4. Add Responsive breakpoints
+5. Add Theming support
+6. Confirm ARIA compliance
+7. Write e2e Tests 
+> It is important to validate your app logic with Angular Material UI components.
 
-## Getting Started
+<br/>
+###### Wirefame 
 
-#### Prerequisites
+The illustration below shows how we planned the layout and identified the primary components that will be used in the Starter application:
 
-You will need **git** to clone the material-start repository. You can get git from
-[http://git-scm.com/](http://git-scm.com/).
+<br/>
+![plancomponents2](https://cloud.githubusercontent.com/assets/210413/6444676/c247c8f8-c0c4-11e4-8206-208f55cbceee.png)
 
-We also use a number of node.js tools to initialize and test material-start. You must have node.js and
-its package manager (npm) installed.  You can get them from [http://nodejs.org/](http://nodejs.org/).
+> Note: that container #2 (above) is a simple `<div>` container and not an Angular Material component.
 
-#### Clone material-start
+<br/>
+- - -
 
-To get you started you can simply clone `master` branch from the
-[Material-Start](https://github.com/angular/material-start) repository and install the dependencies:
+##### ES5 Tutorials
 
-> NOTE: The `master` branch contains the traditional, ES5 implementation familiar to Angular developers.
+These tutorials assume that you have already cloned the repository and executed the `npm install` command.
 
-Clone the material-start repository using [git][git]:
+You will notice html Tutorials #0 thru #8: these will be used to guide you through the development process. By following these tutorials stages, you will be very quickly introduced to the powerful features of Angular Material.
 
-```
-git clone https://github.com/angular/material-start.git
-cd material-start
-```
+Each tutorial presents the resulting changes for that stage. It is recommended, however, that you start with the preceding tutorial and manually make the changes requested. The effort you invest to implement these changes will highlight specific concepts at each Tutorial stage.
 
-If you just want to start a new project without the material-start commit history then you can do:
+> At each tutorial stage, you should use a web-server to view the that tutorial page. Open the dev console to see any warnings and browser the elements.
 
-```bash
-git clone --depth=1 https://github.com/angular/material-start.git <your-project-name>
-```
+<br/>
+- - -
 
-The `depth=1` tells git to only pull down one commit worth of historical data.
+### Step #1:
 
-#### Install Dependencies
+<span style="font-size:10px;">@see [tutorial_1.html](https://github.com/angular/material-start/blob/es5-tutorial/app/tutorial_1.html#L26-L34)<span>
 
-We have two kinds of dependencies in this project: tools and AngularJS framework code.  The tools help
-us manage and test the application.
+Here you modified the shell application [available in `tutorial_0.html`] to use Angular-Material.
 
-* We get the tools we depend upon via `npm`, the [node package manager][npm].
-* We get the AngularJS code via `bower`, a [client-side code package manager][bower].
+* Use Bower to install angular-material with `bower install angular-material -D`
+* In the HTML, load the CSS and JS modules:
+* Configure the app dependency on 'ngMaterial'
 
-We have preconfigured `npm` to automatically run `bower` so we can simply do:
+```html
+  <head>
+    <link rel="stylesheet" href="./bower_components/angular-material/angular-material.css"/>
+  </head>
 
-```
-npm install
-```
+  <body>
 
-Behind the scenes this will also call `bower install`.  You should find that you have two new
-folders in your project.
+    <script src="./bower_components/angular-animate/angular-animate.js"></script>
+    <script src="./bower_components/angular-aria/angular-aria.js"></script>
+    <script type="text/javascript" src="./bower_components/angular-material/angular-material.js"></script>
 
-* `node_modules` - contains the npm packages for the tools we need
-* `app/bower_components` - contains the AngularJS framework files
-
-*Note that the `bower_components` folder would normally be installed in the root folder but
-material-start changes this location through the `.bowerrc` file.  Putting it in the app folder makes
-it easier to serve the files by a web server.*
-
-### Run End-to-End Tests
-
-To run your e2e tests your should install and configure Protractor and the Selenium WebServer.
-These are already specified as npm dependencies within `package.json`. Simply run these
-terminal commands:
-
-```console
-npm update
-webdriver-manager update
+	<script>
+		angular.module('starterApp', ['ngMaterial']);
+	</script>
+  </body>
 ```
 
-Your can read more details about Protractor and e2e here: http://angular.github.io/protractor/#/
-for more details on Protractor.
+### Step #2:
 
- 1. Start your local HTTP Webserver: `live-server` or `http-server`.
+<span style="font-size:10px;">@see [tutorial_2.html](https://github.com/angular/material-start/blob/es5-tutorial/app/tutorial_2.html#L30-L39)<span>
 
-```console
-cd ./app; live-server;
+Here you used the wireframe planning and layout to identify the components and attributes needed.
+
+* Add the `<md-toolbar>`, `<md-sidenav>`, `<md-content>` containers
+> Note: that the md-sidenav is the container the Users **master** list view, and the md-content is the container for the User **detail** view.
+* Add the **layout** and **flex** attributes to configure the container layouts and sizing aspects.
+* Use `md-locked-open` to lock the sidenav open on the left
+* Use the `md-whiteframe-z2` to add a shadow the the sidenav
+
+```html
+  <body ng-app="starterApp" layout="column">
+
+	<!-- Container #1 (see wireframe) -->
+    <md-toolbar layout="row" >
+      <h1>Angular Material - Starter App</h1>
+    </md-toolbar>
+
+	<!-- Container #2 -->
+    <div flex layout="row">
+
+		<!-- Container #3 -->
+        <md-sidenav md-is-locked-open="true" class="md-whiteframe-z2"></md-sidenav>
+
+		<!-- Container #4 -->
+        <md-content flex id="content"></md-content>
+
+    </div>
+	
+  </body>
 ```
 
-> Note: since `live-server` is working on port 8080, we configure the `protractor.conf.js` to use
-`baseUrl: 'http://localhost:8080'`
+### Step #3:
 
- 2. In another tab, start a Webdriver instance:
- 
-```console
-webdriver-manager start
+<span style="font-size:10px;">@see [tutorial_3.html](https://github.com/angular/material-start/blob/es5-tutorial/app/tutorial_3.html#L43-L72)<span>
+
+
+Here you will use hard-coded elements to confirm rendering and layout of the container child elements and Angular Material components.
+
+* Add the `<md-toolbar>`, `<md-sidenav>`, `<md-content>` containers
+> Note: that the md-sidenav is the container for the **master** Users List view, and the md-content is the container for the **detail** User Detail view.
+* Add the **layout** and **flex** attributes to configure the container layouts and sizing aspects.
+* Use `md-locked-open` to lock the sidenav open on the left
+* Use the `md-whiteframe-z2` to add a shadow the the sidenav
+
+```html
+  <body ng-app="starterApp" layout="column">
+
+	<md-sidenav md-is-locked-open="true" class="md-whiteframe-z2">
+	  <md-list>
+
+		<!-- List item #1 -->
+		<md-item >
+			<md-button>
+			  <md-icon md-svg-src="./assets/svg/avatar-1.svg" class="avatar"></md-icon>
+			  Lia Luogo
+			</md-button>
+		</md-item>
+
+		<!-- List item #2 -->
+		<md-item >
+			<md-button>
+			 <md-icon md-svg-src="./assets/svg/avatar-4.svg" class="avatar"></md-icon>
+			  Lawrence Ray
+			</md-button>
+		</md-item>
+
+	  </md-list>
+	</md-sidenav>
+
+	<md-content flex id="content">
+	  <!-- User details sample -->
+
+	  <md-icon md-svg-src="./assets/svg/avatar-1.svg" class="avatar"></md-icon>
+	  <h2>Lia Luogo</h2>
+	  <p>
+		I love cheese...
+	  </p>
+	</md-content>
+
+  </body>
 ```
 
->This will start up a Selenium Server and will output a bunch of info logs. Your Protractor test
-will send requests to this server to control a local browser. You can see information about the
-status of the server at `http://localhost:4444/wd/hub`. If you see errors, verify path in
-`e2e-tests/protractor.conf.js` for `chromeDriver` and `seleniumServerJar` to your local file system.
+### Step #4:
 
- 3. Run your e2e tests using the `test` script defined in `package.json`:
- 
-```console
-npm test
+<span style="font-size:10px;">@see [tutorial_4.html](https://github.com/angular/material-start/blob/es5-tutorial/app/tutorial_4.html#L85-L91)<span>
+
+Here you integrate your custom, application logic.
+
+* Define a Angular module for your custom code
+* Define your data services, models, and controllers
+* Load your custom code
+* Register your Angular module for runtime DI
+
+```html
+<script src="./src/users/Users.js"></script>
+<script src="./src/users/UsersListController.js"></script>
+<script src="./src/users/UsersDataservice.js"></script>
+
+<script type="text/javascript">
+
+  angular.module('starterApp', ['ngMaterial', 'users']);
+
+</script>
 ```
 
-> This uses the local **Protractor** installed at `./node_modules/protractor`
+### Step #5:
 
-## Directory Layout
+<span style="font-size:10px;">@see [tutorial_5.html](https://github.com/angular/material-start/blob/es5-tutorial/app/tutorial_5.html#L52-L71)<span>
 
-```
-app/                    --> all of the source files for the application
-  assets/app.css        --> default stylesheet
-  src/           --> all app specific modules
-     users/              --> package for user features
-  index.html            --> app layout file (the main html template file of the app)
-karma.conf.js         --> config file for running unit tests with Karma
-e2e-tests/            --> end-to-end tests
-  protractor-conf.js    --> Protractor config file
-  scenarios.js          --> end-to-end scenarios to be run by Protractor
-```
+Here you will replace the hardcoded HTML with dynamic markup using Angular directives (eg ng-repeat) and `{{ }}` interpolation markup.
 
-## Updating Angular
+* Use dynamic HTML that will be compiled and rendered by Angular
+* Register a custom icon set of 'user' avatars for the user list
+* Register **menu** and **share** icon urls for the md-buttons
 
-Previously we recommended that you merge in changes to angular-seed into your own fork of the
-project. Now that the AngularJS framework library code and tools are acquired through package managers
-(npm and bower) you can use these tools instead to update the dependencies.
+```html
+ <!-- Wireframe Container #2 -->
+ <div flex layout="row">
+ 	<!-- Wireframe Container #3 -->
+	<md-sidenav md-is-locked-open="true" class="md-whiteframe-z2">
+	  <md-list>
+		<md-item ng-repeat="it in ul.users">
+			<md-button ng-click="ul.selectUser(it)" ng-class="{'selected' : it === ul.selected }">
+			  <md-icon md-svg-icon="{{it.avatar}}" class="avatar"></md-icon>
+			  {{it.name}}
+			</md-button>
+		</md-item>
+	  </md-list>
+	</md-sidenav>
 
-You can update the tool dependencies by running:
+	<!-- Wireframe Container #4 -->
+	<md-content flex id="content">
+	  <md-icon md-svg-icon="{{ul.selected.avatar}}" class="avatar"></md-icon>
+	  <h2>{{ul.selected.name}}</h2>
+	  <p>{{ul.selected.content}}</p>
 
-```
-npm update
-```
-
-This will find the latest versions that match the version ranges specified in the `package.json` file.
-
-You can update the Angular dependencies by running:
-
-```
-bower update
-```
-
-This will find the latest versions that match the version ranges specified in the `bower.json` file.
+	  <md-button class="action" md-no-ink>
+		<md-icon md-svg-icon="share" ></md-icon>
+	  </md-button>
+	</md-content>
+ </div>
 
 
-## Serving the Application Files
+ <script type="text/javascript">
+  angular
+	  .module('starterApp', ['ngMaterial', 'users'])
+	  .config(function( $mdIconProvider ){
 
-While AngularJS is client-side-only technology and it's possible to create AngularJS webapps that
-don't require a backend server at all, we recommend serving the project files using a local
-web server during development to avoid issues with security restrictions (sandbox) in browsers. The
-sandbox implementation varies between browsers, but quite often prevents things like cookies, xhr,
-etc to function properly when an html page is opened via `file://` scheme instead of `http://`.
-
-### Running the App during Development
-
-The angular-seed project comes pre-configured with a local development web server.  It is a node.js
-tool called [http-server][http-server].  You can install http-server globally:
-
-```
-npm install -g live-server
+		  // Register the user `avatar` icons
+		  $mdIconProvider
+				  .defaultIconSet("./assets/svg/avatars.svg", 128)
+				  .icon("menu", "./assets/svg/menu.svg", 24)
+				  .icon("share", "./assets/svg/share.svg", 24);
+	  });
+ </script>
 ```
 
-Then you can start your own development web server to serve static files from a folder by running:
+### Step #6:
 
+<span style="font-size:10px;">@see [tutorial_6.html](https://github.com/angular/material-start/blob/es5-tutorial/app/tutorial_6.html#L51)<span>
+
+Here you will add responsive breakpoints so the application layout will adapt to different device display sizes.
+
+* Lock the Users list open if device display is wider than > 600px; hide otherwise.
+* Hide the Toolbar menu icon button if the Users list is open.
+* Add `click` support for the **menu** and **share** buttons.
+* Register icons for bottomsheet
+
+```html
+<body>
+	<!-- Wireframe Container #1 -->
+    <md-toolbar layout="row">
+      <md-button class="menu" hide-gt-sm ng-click="ul.toggleList()"></md-button>
+    </md-toolbar>
+
+	<!-- Wireframe Container #2 -->
+	<div flex layout="row">
+
+	 <!-- Wireframe Container #3 -->
+	 <md-sidenav md-is-locked-open="$media('gt-sm')"
+				 md-component-id="left">
+	 </md-sidenav>
+
+	 <!-- Wireframe Container #4 -->
+	 <md-content flex id="content">
+	  <md-button class="share" md-no-ink ng-click="ul.share($event)"></md-button>
+	 </md-content>
+
+	</div>
+</body>
 ```
-cd app
-live-server
+
+Register the **share** icons displayed in the User Detail view bottomsheet:
+
+```html
+<script type="text/javascript">
+
+  angular
+	  .module('starterApp', ['ngMaterial', 'users'])
+	  .config(function($mdIconProvider){
+
+		  $mdIconProvider
+			  .defaultIconSet("./assets/svg/avatars.svg", 128)
+			  .icon("menu"       , "./assets/svg/menu.svg"        , 24)
+			  .icon("share"      , "./assets/svg/share.svg"       , 24)
+			  .icon("google_plus", "./assets/svg/google_plus.svg" , 512)
+			  .icon("hangouts"   , "./assets/svg/hangouts.svg"    , 512)
+			  .icon("twitter"    , "./assets/svg/twitter.svg"     , 512)
+			  .icon("phone"      , "./assets/svg/phone.svg"       , 512);
+	  });
+
+</script>
 ```
 
-Alternatively, you can choose to configure your own webserver, such as apache or nginx. Just
-configure your server to serve the files under the `app/` directory.
+
+### Step #7:
+
+<span style="font-size:10px;">@see [tutorial_7.html](https://github.com/angular/material-start/blob/es5-tutorial/app/tutorial_7.html#L63-L68)<span>
+
+Here you will configure a different, darker theme to be used.
+
+* Use `$mdThemingProvider` to configure a different theme using primary colors from the **brown** color palette and accent colors from the **red** color palette.
+
+```html
+<script type="text/javascript">
+
+  angular
+	  .module('starterApp', ['ngMaterial', 'users'])
+	  .config(function($mdThemingProvider, $mdIconProvider){
+
+		  $mdThemingProvider.theme('default')
+			  .primaryPalette('brown')
+			  .accentPalette('red');
+	  });
+
+</script>
+```
+
+### Step #8:
+
+<span style="font-size:10px;">@see [tutorial_8.html](https://github.com/angular/material-start/blob/es5-tutorial/app/tutorial_8.html#L19)<span>
+
+Here you will fix any ARIA warnings that Angular Material may display in the Dev console.
+
+* Insert `aria-label` attributes for mdButton components that do not have labels.
+
+```html
+<body>
+	<!-- Wireframe Container #1 -->
+    <md-toolbar layout="row">
+      <md-button class="menu" aria-label="Show User List"></md-button>
+    </md-toolbar>
+
+	<!-- Wireframe Container #2 -->
+	<div flex layout="row">
+
+	 <!-- Wireframe Container #3 -->
+	 <md-sidenav>...</md-sidenav>
+
+	 <!-- Wireframe Container #4 -->
+	 <md-content flex id="content">
+	  <md-button class="share" aria-label="Share"></md-button>
+	 </md-content>
+
+	</div>
+</body>
+```
+
+## Summary
+
+With only eight (8) Tutorial Steps and a few minutes of work, we have quickly created a functional Angular Material application that is beautiful, responsive, theme'ed, accessible, and easily maintained.
 
 
-## Contact
-
-For more information on AngularJS please check out http://angularjs.org/
-For more information on Angular Material, check out https://material.angularjs.org/
-
-[git]: http://git-scm.com/
-[bower]: http://bower.io
-[npm]: https://www.npmjs.org/
-[node]: http://nodejs.org
-[protractor]: https://github.com/angular/protractor
-[jasmine]: http://jasmine.github.io
-[karma]: http://karma-runner.github.io
-[travis]: https://travis-ci.org/
-[http-server]: https://github.com/nodeapps/http-server

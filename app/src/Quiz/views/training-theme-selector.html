@@ -1,0 +1,30 @@
+
+<div layout="row" layout-align="space-around" ng-if="isOnLoad">
+    <md-progress-circular md-mode="indeterminate"></md-progress-circular>
+</div>
+
+
+<md-grid-list md-cols-sm="2" md-cols-md="3" md-cols-gt-md="6" md-row-height-gt-md="1:1" md-row-height="2:2" md-gutter="12px" md-gutter-gt-sm="8px">
+
+    <md-grid-tile class="training-theme-selector-grid-tile" ng-repeat="tag in tags" ng-style="{'background-image':'url({{tag.media.urls.crop}})'}">
+        <md-grid-tile-footer>
+            <md-checkbox flex="100" ng-model="tag.checked">
+                {{ tag.name }}
+            </md-checkbox>
+        </md-grid-tile-footer>
+    </md-grid-tile>
+
+</md-grid-list>
+
+
+<h2>Récapituliatif de l'entrainement</h2>
+<md-chips>
+    <md-chip ng-repeat="tag in tags" ng-if="tag.checked">{{ tag.name }}</md-chip>
+</md-chips>
+
+<md-button class="md-fab md-fab-bottom-right right fixed" aria-label="Photos">
+    <md-icon md-svg-src="./assets/img/icons/ic_chevron_right_24px.svg" style="width: 24px; height: 24px;"></md-icon>
+    <md-tooltip>
+        Commencer
+    </md-tooltip>
+</md-button>
