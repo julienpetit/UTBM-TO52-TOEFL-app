@@ -31,10 +31,10 @@ angular
         // Routing
         $routeProvider
             .when('/', {
-                templateUrl: 'src/layout/views/home.html'
+                templateUrl: 'src/Layout/views/home.html'
             })
             .when('/training', {
-                templateUrl: 'src/quiz/views/training-theme-selector.html',
+                templateUrl: 'src/Quiz/views/training-theme-selector.html',
                 controller: 'TrainingMenuController'
             });
             //.when('/layout/:tmpl', {
