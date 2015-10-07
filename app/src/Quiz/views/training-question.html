@@ -1,0 +1,45 @@
+
+<div class="training-question">
+
+
+    <div layout="row" layout-align="space-around" ng-if="isOnLoad">
+        <md-progress-circular md-mode="indeterminate"></md-progress-circular>
+    </div>
+
+    <md-list ng-cloak="" ng-show="!isOnLoad">
+        <md-subheader class="md-no-sticky">Sélectionnez la ou les réponses justes</md-subheader>
+
+        <md-list-item>
+            <h3>{{question.title}}</h3>
+        </md-list-item>
+
+        <md-list-item ng-repeat="answer in question.answers" class="item-answer-clickable" ng-class="{'active': answer.checked}">
+
+            <div class="md-list-item-text compact">
+                <h4>{{answer.title}}</h4>
+            </div>
+
+            <md-checkbox class="md-secondary" ng-model="answer.checked"></md-checkbox>
+        </md-list-item>
+
+        <md-divider></md-divider>
+    </md-list>
+
+    <div layout="row" layout-align="center center" ng-if="!isOnLoad">
+        <button class="md-raised md-primary md-button md-default-theme btn-toggle-all" ng-if="question.hint" ng-click="showHint()">
+            <span class="ng-scope">Besoin d'aide</span>
+            <div class="md-ripple-container"></div>
+        </button>
+
+        <button class="md-raised md-primary md-button md-default-theme btn-toggle-all" ng-if="answered" ng-click="nextQuestion()">
+            <span class="ng-scope">Question suivante</span>
+            <div class="md-ripple-container"></div>
+        </button>
+
+        <button class="md-raised md-primary md-button md-default-theme btn-toggle-all" ng-if="!answered" ng-click="showAnswer()">
+            <span class="ng-scope">Voir la réponse</span>
+            <div class="md-ripple-container"></div>
+        </button>
+    </div>
+
+</div>

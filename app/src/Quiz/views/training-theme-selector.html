@@ -26,7 +26,7 @@
         <md-subheader class="md-no-sticky">Choisissez le nombre de questions</md-subheader>
 
         <md-list-item>
-            <md-radio-group ng-model="data.questionsCount" layout="row" layout-align="space-around center">
+            <md-radio-group ng-model="questionsCount" layout="row" layout-align="space-around center">
                 <md-radio-button ng-repeat="number in questionsCountSelection"
                                  ng-value="number"
                                  aria-label="number"
@@ -40,15 +40,14 @@
         <md-divider></md-divider>
 
 
-        <md-subheader class="md-no-sticky">Les {{ data.questionsCount }} questions porterons sur les thèmes suivants</md-subheader>
+        <md-subheader class="md-no-sticky">Les <strong>{{ questionsCount }}</strong> questions porterons sur les thèmes suivants</md-subheader>
         <md-chips>
             <md-chip ng-repeat="tag in tags" ng-if="tag.checked">{{ tag.name }}</md-chip>
         </md-chips>
     </md-list>
 
-    <div layout="row" layout-align="center center">
-        <button class="md-raised md-primary md-button md-default-theme btn-toggle-all"><span class="ng-scope">Commencer l'entraînement</span><div class="md-ripple-container"></div></button>
-
+    <div layout="row" layout-align="center center" ng-if="!isOnLoad">
+        <button class="md-raised md-primary md-button md-default-theme btn-toggle-all" ng-click="startTraining()"><span class="ng-scope">Commencer l'entraînement</span><div class="md-ripple-container"></div></button>
     </div>
 
 

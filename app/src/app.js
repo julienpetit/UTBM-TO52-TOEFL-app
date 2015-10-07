@@ -40,6 +40,10 @@ angular
                 templateUrl: 'src/Quiz/views/training-theme-selector.html',
                 controller: 'TrainingMenuController'
             })
+            .when('/training/questions', {
+                templateUrl: 'src/Quiz/views/training-question.html',
+                controller: 'TrainingQuestionController'
+            })
             .when('/learning/categorie/:categoryId', {
                 templateUrl: 'src/Learning/views/cards.html',
                 controller: 'LearningController'
