@@ -36,6 +36,10 @@ angular
             .when('/training', {
                 templateUrl: 'src/Quiz/views/training-theme-selector.html',
                 controller: 'TrainingMenuController'
+            })
+            .when('/learning/categorie/:categoryId', {
+                templateUrl: 'src/Learning/views/cards.html',
+                controller: 'LearningController'
             });
             //.when('/layout/:tmpl', {
             //    templateUrl: function(params){

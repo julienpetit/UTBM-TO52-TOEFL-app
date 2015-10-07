@@ -1,0 +1,26 @@
+<div id="cards" >
+
+    <div layout="row" layout-align="space-around" ng-if="isOnLoad">
+        <md-progress-circular md-mode="indeterminate"></md-progress-circular>
+    </div>
+
+    <div layout="row">
+
+        <md-card ng-repeat="card in cards" flex="50" flex-sm="100" flex-md="50" class="card">
+            <img ng-src="{{ card.media.urls.wide }}" class="md-card-image" alt="Washed Out">
+            <md-card-content>
+                <h2 class="md-title">{{ card.title }}</h2>
+                <p>
+                    {{ card.content }}
+                </p>
+            </md-card-content>
+            <div class="md-actions" layout="row" layout-align="end center">
+                <md-button>Action 1</md-button>
+                <md-button>Action 2</md-button>
+            </div>
+        </md-card>
+
+    </div>
+
+</div>
+
