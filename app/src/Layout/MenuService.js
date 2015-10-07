@@ -78,6 +78,7 @@
                     ]
                 });
 
+                onLocationChange();
             })
             .error(function() {
 
@@ -147,6 +148,7 @@
         }
 
         var self;
+
 
         $rootScope.$on('$locationChangeSuccess', onLocationChange);
 

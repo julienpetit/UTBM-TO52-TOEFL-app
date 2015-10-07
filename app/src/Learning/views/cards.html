@@ -7,7 +7,7 @@
     <div layout="row">
 
         <md-card ng-repeat="card in cards" flex="50" flex-sm="100" flex-md="50" class="card">
-            <img ng-src="{{ card.media.urls.wide }}" class="md-card-image" alt="Washed Out">
+            <img ng-src="{{ card.media.urls.wide }}" ng-if="card.media.urls.wide" class="md-card-image" alt="Washed Out">
             <md-card-content>
                 <h2 class="md-title">{{ card.title }}</h2>
                 <p>

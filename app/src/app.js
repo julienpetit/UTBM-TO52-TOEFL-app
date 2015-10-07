@@ -25,8 +25,11 @@ angular
 
         // Setting color theme
         $mdThemingProvider.theme('default')
-            .primaryPalette('green')
-            .accentPalette('pink');
+            .primaryPalette('teal')
+            .accentPalette('deep-orange');
+
+        // available color : red, pink, purple, deep-purple, indigo, blue, light-blue, cyan, teal, green, light-green, lime, yellow, amber, orange, deep-orange, brown, grey, blue-grey
+
 
         // Routing
         $routeProvider
