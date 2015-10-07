@@ -22,77 +22,123 @@
             type: 'link'
         }];
 
-        sections.push();
-
-        sections.push({
+        var learningSection = {
             name: 'Cours',
             type: 'heading',
-            children: [
-                {
-                    name: "Le développement",
-                    type: 'toggle',
-                    pages: [
-                        {
-                            name: 'Typography',
-                            url: '/CSS/typography',
+            children: []
+        };
+
+        $http.get('http://to52.julienpetit.fr/api/v1/learning/categories')
+            .success(function(data) {
+
+                console.log(data);
+
+                // Transerve all category tree
+                data.forEach(function(category) {
+
+                    var pages = [];
+
+                    category.children.forEach(function(subCategory) {
+
+                        var page = {
+                            name: subCategory.name,
+                            url: '/learning/categorie/' + subCategory.id,
                             type: 'link'
+                        };
+
+                        pages.push(page);
+                    });
+
+                    var section = {
+                        name: category.name,
+                        type: 'toggle',
+                        pages: pages
+                    };
+
+                    learningSection.children.push(section);
+
+                });
+
+                sections.push(learningSection);
+
+                sections.push({
+                    name: 'Exercices',
+                    type: 'heading',
+                    children: [
+                        {
+                            name: 'Entrainement par thème',
+                            type: 'link',
+                            url: '/training'
                         },
                         {
-                            name : 'Button',
-                            url: '/CSS/button',
-                            type: 'link'
-                        },
-                        {
-                            name : 'Checkbox',
-                            url: '/CSS/checkbox',
-                            type: 'link'
-                        }]
-                },
-                {
-                    name: 'Theming',
-                    type: 'toggle',
-                    pages: [
-                        {
-                            name: 'Introduction and Terms',
-                            url: '/Theming/01_introduction',
-                            type: 'link'
-                        },
-                        {
-                            name: 'Declarative Syntax',
-                            url: '/Theming/02_declarative_syntax',
-                            type: 'link'
-                        },
-                        {
-                            name: 'Configuring a Theme',
-                            url: '/Theming/03_configuring_a_theme',
-                            type: 'link'
-                        },
-                        {
-                            name: 'Multiple Themes',
-                            url: '/Theming/04_multiple_themes',
-                            type: 'link'
+                            name: 'Évaluation',
+                            type: 'link',
+                            url: '/efe'
                         }
                     ]
-                }
-            ]
-        });
+                });
 
-        sections.push({
-            name: 'Exercices',
-            type: 'heading',
-            children: [
-                {
-                    name: 'Entrainement par thème',
-                    type: 'link',
-                    url: '/training'
-                },
-                {
-                    name: 'Évaluation',
-                    type: 'link',
-                    url: '/efe'
-                }
-            ]
-        });
+            })
+            .error(function() {
+
+            });
+
+
+
+        //sections.push({
+        //    name: 'Cours',
+        //    type: 'heading',
+        //    children: [
+        //        {
+        //            name: "Le développement",
+        //            type: 'toggle',
+        //            pages: [
+        //                {
+        //                    name: 'Typography',
+        //                    url: '/CSS/typography',
+        //                    type: 'link'
+        //                },
+        //                {
+        //                    name : 'Button',
+        //                    url: '/CSS/button',
+        //                    type: 'link'
+        //                },
+        //                {
+        //                    name : 'Checkbox',
+        //                    url: '/CSS/checkbox',
+        //                    type: 'link'
+        //                }]
+        //        },
+        //        {
+        //            name: 'Theming',
+        //            type: 'toggle',
+        //            pages: [
+        //                {
+        //                    name: 'Introduction and Terms',
+        //                    url: '/Theming/01_introduction',
+        //                    type: 'link'
+        //                },
+        //                {
+        //                    name: 'Declarative Syntax',
+        //                    url: '/Theming/02_declarative_syntax',
+        //                    type: 'link'
+        //                },
+        //                {
+        //                    name: 'Configuring a Theme',
+        //                    url: '/Theming/03_configuring_a_theme',
+        //                    type: 'link'
+        //                },
+        //                {
+        //                    name: 'Multiple Themes',
+        //                    url: '/Theming/04_multiple_themes',
+        //                    type: 'link'
+        //                }
+        //            ]
+        //        }
+        //    ]
+        //});
+
+
 
 
 
