@@ -6,13 +6,15 @@
 
     <div layout="row">
 
-        <md-card ng-repeat="card in cards" flex="50" flex-sm="100" flex-md="50" class="card">
+        <md-card ng-repeat="card in cards" flex="100" flex-sm="100" flex-md="100" class="card">
             <img ng-src="{{ card.media.urls.wide }}" ng-if="card.media.urls.wide" class="md-card-image" alt="Washed Out">
             <md-card-content>
                 <h2 class="md-title">{{ card.title }}</h2>
-                <p>
-                    {{ card.content }}
-                </p>
+                <btf-markdown btf-markdown="card.content">
+                    #Markdown directive
+                    *It works!*
+                </btf-markdown>
+
             </md-card-content>
             <div class="md-actions" layout="row" layout-align="end center">
                 <md-button>Action 1</md-button>

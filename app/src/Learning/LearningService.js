@@ -2,7 +2,7 @@
     'use strict';
 
     angular.module('mainApp')
-        .service('learningService', ['$q', '$http', LearningService]);
+        .service('learningService', ['$q', '$http', 'appConfig', LearningService]);
 
     /**
      * Users DataService
@@ -12,7 +12,7 @@
      * @returns {{loadAll: Function}}
      * @constructor
      */
-    function LearningService($q, $http){
+    function LearningService($q, $http, appConfig){
 
         // Promise-based API
         return {
@@ -21,7 +21,7 @@
 
                 var def = $q.defer();
 
-                $http.get("http://to52.julienpetit.fr/api/v1/learning/cards/category/" + categoryId)
+                $http.get( appConfig.backend + "/learning/cards/category/" + categoryId)
                     .success(function(data) {
                         def.resolve(data);
                     })

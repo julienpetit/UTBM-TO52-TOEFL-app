@@ -2,7 +2,7 @@
     'use strict';
 
     angular.module('mainApp')
-        .service('quizService', ['$q', '$http', QuizService]);
+        .service('quizService', ['$q', '$http', 'appConfig', QuizService]);
 
     /**
      * Users DataService
@@ -12,7 +12,7 @@
      * @returns {{loadTags: Function}}
      * @constructor
      */
-    function QuizService($q, $http){
+    function QuizService($q, $http, appConfig){
 
         // Promise-based API
         return {
@@ -20,7 +20,7 @@
 
                 var def = $q.defer();
 
-                $http.get("http://to52.julienpetit.fr/api/v1/quiz/tags")
+                $http.get( appConfig.backend + "/quiz/tags")
                     .success(function(data) {
                         def.resolve(data);
                     })
@@ -36,7 +36,7 @@
 
                 var def = $q.defer();
 
-                var url = "http://to52.julienpetit.fr/api/v1/quiz/questions?tags=" + JSON.stringify(tags) + "&limit=" + limit;
+                var url = appConfig.backend + "/quiz/questions?tags=" + JSON.stringify(tags) + "&limit=" + limit;
                 console.log(url);
                 $http.get(url)
                     .success(function(data) {

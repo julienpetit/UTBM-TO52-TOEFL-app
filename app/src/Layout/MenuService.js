@@ -2,7 +2,7 @@
     'use strict';
 
     angular.module('mainApp')
-        .service('menuService', ['$q', '$http', '$rootScope', '$location', MenuService]);
+        .service('menuService', ['$q', '$http', '$rootScope', '$location', 'appConfig', MenuService]);
 
     /**
      * Users DataService
@@ -12,7 +12,7 @@
      * @returns {{loadAll: Function}}
      * @constructor
      */
-    function MenuService($q, $http, $rootScope, $location){
+    function MenuService($q, $http, $rootScope, $location, appConfig){
 
         var version = {};
 
@@ -28,10 +28,8 @@
             children: []
         };
 
-        $http.get('http://to52.julienpetit.fr/api/v1/learning/categories')
+        $http.get( appConfig.backend + '/learning/categories')
             .success(function(data) {
-
-                console.log(data);
 
                 // Transerve all category tree
                 data.forEach(function(category) {
@@ -73,7 +71,7 @@
                         {
                             name: 'Évaluation',
                             type: 'link',
-                            url: '/efe'
+                            url: '/examination'
                         }
                     ]
                 });
@@ -84,71 +82,7 @@
 
             });
 
-
-
-        //sections.push({
-        //    name: 'Cours',
-        //    type: 'heading',
-        //    children: [
-        //        {
-        //            name: "Le développement",
-        //            type: 'toggle',
-        //            pages: [
-        //                {
-        //                    name: 'Typography',
-        //                    url: '/CSS/typography',
-        //                    type: 'link'
-        //                },
-        //                {
-        //                    name : 'Button',
-        //                    url: '/CSS/button',
-        //                    type: 'link'
-        //                },
-        //                {
-        //                    name : 'Checkbox',
-        //                    url: '/CSS/checkbox',
-        //                    type: 'link'
-        //                }]
-        //        },
-        //        {
-        //            name: 'Theming',
-        //            type: 'toggle',
-        //            pages: [
-        //                {
-        //                    name: 'Introduction and Terms',
-        //                    url: '/Theming/01_introduction',
-        //                    type: 'link'
-        //                },
-        //                {
-        //                    name: 'Declarative Syntax',
-        //                    url: '/Theming/02_declarative_syntax',
-        //                    type: 'link'
-        //                },
-        //                {
-        //                    name: 'Configuring a Theme',
-        //                    url: '/Theming/03_configuring_a_theme',
-        //                    type: 'link'
-        //                },
-        //                {
-        //                    name: 'Multiple Themes',
-        //                    url: '/Theming/04_multiple_themes',
-        //                    type: 'link'
-        //                }
-        //            ]
-        //        }
-        //    ]
-        //});
-
-
-
-
-
-        function sortByName(a,b) {
-            return a.name < b.name ? -1 : 1;
-        }
-
         var self;
-
 
         $rootScope.$on('$locationChangeSuccess', onLocationChange);
 
@@ -182,12 +116,8 @@
 
         function onLocationChange() {
 
-            console.log('onLocationChange');
-
             var path = $location.path();
 
-
-            console.log(path);
             var introLink = {
                 name: "Introduction",
                 url:  "/",
@@ -243,4 +173,4 @@
 
 
 
-})()
+})();

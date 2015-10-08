@@ -3,7 +3,7 @@
  */
 angular
     // Importing modules to mainAp
-    .module('mainApp', ['ngMaterial', 'ngRoute'])
+    .module('mainApp', ['ngMaterial', 'ngRoute', 'btford.markdown'])
 
     // mainApp configuration
     .config(function($mdThemingProvider, $mdIconProvider, $routeProvider){
@@ -44,6 +44,10 @@ angular
                 templateUrl: 'src/Quiz/views/training-question.html',
                 controller: 'TrainingQuestionController'
             })
+            .when('/examination', {
+                templateUrl: 'src/Quiz/views/training-question.html',
+                controller: 'TrainingQuestionController'
+            })
             .when('/learning/categorie/:categoryId', {
                 templateUrl: 'src/Learning/views/cards.html',
                 controller: 'LearningController'
@@ -72,6 +76,10 @@ angular
             //    templateUrl: 'partials/getting-started.tmpl.html'
             //});
 
+    })
+    .constant('appConfig', {
+        'backend': 'http://to52.julienpetit.fr/api/v1',
+        'version': 0.1
     });
 
 

@@ -3,7 +3,7 @@
     angular
         .module('mainApp')
         .controller('TrainingMenuController', [
-            'quizService', '$scope', '$location',
+            'quizService', '$scope', '$location', '$mdDialog',
             TrainingMenuController
         ])
         .controller('TrainingQuestionController', [
@@ -12,38 +12,26 @@
         ]);
 
     /**
-     * Main Controller for the Angular Material Starter App
+     *
+     * @param quizService
      * @param $scope
+     * @param $location
+     * @param $mdDialog
      * @constructor
      */
-    function TrainingMenuController( quizService, $scope, $location ) {
+    function TrainingMenuController( quizService, $scope, $location, $mdDialog ) {
 
-        // Keeping reference on this (scope js)
-        var self = this;
+        // *********************************
+        // View Attributes
+        // *********************************
 
         // Displaying spinner
         $scope.isOnLoad = true;
-
-        // *********************************
-        // Attributes
-        // *********************************
-
-        // Load all categories
-        quizService
-            .loadTags()
-            .then( function( tags ) {
-                $scope.tags = [].concat(tags);
-                console.log(tags);
-
-                // Hiding spinner
-                $scope.isOnLoad = false;
-            });
-
-
+        $scope.questionsCount = 5;
         $scope.questionsCountSelection = [ 5, 10, 15, 20, 30 ];
 
         // *********************************
-        // Internal methods
+        // View methods
         // *********************************
 
         $scope.startTraining = function() {
@@ -55,9 +43,14 @@
                     tags.push(tag.id);
             });
 
-            // Otherwie display error
+            // Otherwise display error
             if( tags.length == 0 ){
-
+                showAlert(
+                    $mdDialog,
+                    "Impossible de commencer",
+                    "Vous devez choisir au moins un thème pour commencer l'entrainenement",
+                    "Fermer"
+                );
                 return;
             }
 
@@ -68,20 +61,31 @@
                 tags: tags,
                 limit: $scope.questionsCount
             });
+        };
 
+        // *********************************
+        // Loading data
+        // *********************************
+        quizService
+            .loadTags()
+            .then( function( tags ) {
+                $scope.tags = [].concat(tags);
 
-        }
+                // Hiding spinner
+                $scope.isOnLoad = false;
+            });
+
     }
 
     /**
-     * Main Controller for the Angular Material Starter App
+     *
+     * @param quizService
      * @param $scope
+     * @param $routeParams
      * @constructor
      */
     function TrainingQuestionController( quizService, $scope, $routeParams ) {
 
-        console.log("yo");
-        console.log($routeParams.limit);
 
         // Keeping reference on this (scope js)
         var self = this;
@@ -137,6 +141,24 @@
             }
         }
 
+    }
+
+    /**
+     *
+     * @param $mdDialog
+     * @param title
+     * @param content
+     * @param btnLabel
+     */
+    function showAlert( $mdDialog , title, content, btnLabel ) {
+        $mdDialog.show(
+            $mdDialog.alert()
+                .parent(angular.element(document.querySelector('body')))
+                .clickOutsideToClose(true)
+                .title(title)
+                .content(content)
+                .ok(btnLabel)
+        );
     }
 
 })();
