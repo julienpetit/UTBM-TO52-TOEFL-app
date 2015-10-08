@@ -87,7 +87,7 @@
         var self = this;
         var questions = [];
         var questionIndex = 0;
-
+        var tags = angular.isArray($routeParams.tags) ? $routeParams.tags : [$routeParams.tags];
         $scope.question = null;
 
         reset();
@@ -99,9 +99,10 @@
         // Attributes
         // *********************************
 
+
         // Load all categories
         quizService
-            .loadQuestions( $routeParams.tags, $routeParams.limit )
+            .loadQuestions( tags, $routeParams.limit )
             .then( function( dataQuestions ) {
                 questions = [].concat(dataQuestions);
 
@@ -118,21 +119,21 @@
         // *********************************
         function reset() {
             $scope.answered = false;
-        };
+        }
 
         $scope.showAnswer = function() {
             $scope.answered = true;
-        }
+        };
 
         $scope.nextQuestion = function() {
             reset();
 
             questionIndex++;
 
-            if( questionIndex > questions.length - 1 ) {
+            if( questionIndex >= questions.length ) {
                 console.log("show results");
             } else {
-                $scope.question = questions[++questionIndex];
+                $scope.question = questions[questionIndex];
             }
         }
 
