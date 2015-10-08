@@ -26,17 +26,17 @@
     </md-list>
 
     <div layout="row" layout-align="center center" ng-if="!isOnLoad">
-        <button class="md-raised md-primary md-button md-default-theme btn-toggle-all" ng-if="question.hint" ng-click="showHint()">
+        <button class="md-raised md-primary md-button md-default-theme" ng-if="question.hint" ng-click="showHint()">
             <span class="ng-scope">Besoin d'aide</span>
             <div class="md-ripple-container"></div>
         </button>
 
-        <button class="md-raised md-primary md-button md-default-theme btn-toggle-all" ng-if="answered" ng-click="nextQuestion()">
+        <button class="md-raised  md-button md-default-theme" ng-if="answered" ng-click="nextQuestion()">
             <span class="ng-scope">Question suivante</span>
             <div class="md-ripple-container"></div>
         </button>
 
-        <button class="md-raised md-primary md-button md-default-theme btn-toggle-all" ng-if="!answered" ng-click="showAnswer()">
+        <button class="md-warn md-raised md-hue-2 md-button md-default-theme" ng-if="!answered" ng-click="showAnswer()">
             <span class="ng-scope">Voir la réponse</span>
             <div class="md-ripple-container"></div>
         </button>
