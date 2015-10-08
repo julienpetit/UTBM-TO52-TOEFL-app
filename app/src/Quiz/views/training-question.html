@@ -19,7 +19,7 @@
                 <h4>{{answer.title}}</h4>
             </div>
 
-            <md-checkbox class="md-secondary" ng-model="answer.checked"></md-checkbox>
+            <md-checkbox class="md-secondary" ng-model="answer.checked" aria-label="{{ answer.title }}"></md-checkbox>
         </md-list-item>
 
         <md-divider></md-divider>
@@ -31,12 +31,12 @@
             <div class="md-ripple-container"></div>
         </button>
 
-        <button class="md-raised  md-button md-default-theme" ng-if="answered" ng-click="nextQuestion()">
+        <button class="md-raised  md-button md-default-theme" ng-if="answered || isExamination" ng-click="nextQuestion()">
             <span class="ng-scope">Question suivante</span>
             <div class="md-ripple-container"></div>
         </button>
 
-        <button class="md-warn md-raised md-button md-default-theme" ng-if="!answered" ng-click="showAnswer()">
+        <button class="md-warn md-raised md-button md-default-theme" ng-if="!answered && !isExamination" ng-click="showAnswer()">
             <span class="ng-scope">Voir la réponse</span>
             <div class="md-ripple-container"></div>
         </button>

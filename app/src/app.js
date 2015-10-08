@@ -46,7 +46,7 @@ angular
             })
             .when('/examination', {
                 templateUrl: 'src/Quiz/views/training-question.html',
-                controller: 'TrainingQuestionController'
+                controller: 'ExaminationQuestionController'
             })
             .when('/learning/categorie/:categoryId', {
                 templateUrl: 'src/Learning/views/cards.html',

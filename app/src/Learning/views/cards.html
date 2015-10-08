@@ -4,25 +4,20 @@
         <md-progress-circular md-mode="indeterminate"></md-progress-circular>
     </div>
 
-    <div layout="row">
 
-        <md-card ng-repeat="card in cards" flex="100" flex-sm="100" flex-md="100" class="card">
-            <img ng-src="{{ card.media.urls.wide }}" ng-if="card.media.urls.wide" class="md-card-image" alt="Washed Out">
-            <md-card-content>
-                <h2 class="md-title">{{ card.title }}</h2>
-                <btf-markdown btf-markdown="card.content">
-                    #Markdown directive
-                    *It works!*
-                </btf-markdown>
+    <md-tabs md-selected="selectedIndex" md-border-bottom  md-dynamic-height md-stretch-tabs>
+        <md-tab ng-repeat="card in cards"
+                ng-disabled="card.disabled"
+                label="{{card.title}}">
 
-            </md-card-content>
-            <div class="md-actions" layout="row" layout-align="end center">
-                <md-button>Action 1</md-button>
-                <md-button>Action 2</md-button>
-            </div>
-        </md-card>
+            <img ng-src="{{ card.media.urls.wide }}" ng-if="card.media.urls.wide" class="card-img" alt="Washed Out">
 
-    </div>
+            <h2 class="md-title">{{ card.title }}</h2>
+            <btf-markdown btf-markdown="card.content">
+            </btf-markdown>
+
+        </md-tab>
+    </md-tabs>
 
 </div>
 

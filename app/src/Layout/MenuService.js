@@ -71,7 +71,7 @@
                         {
                             name: 'Évaluation',
                             type: 'link',
-                            url: '/examination'
+                            url: '/examination?isExamination=1'
                         }
                     ]
                 });

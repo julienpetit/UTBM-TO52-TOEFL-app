@@ -8,7 +8,11 @@
         ])
         .controller('TrainingQuestionController', [
             'quizService', '$scope', '$routeParams',
-            TrainingQuestionController
+            QuestionController
+        ])
+        .controller('ExaminationQuestionController', [
+            'quizService', '$scope', '$routeParams',
+            QuestionController
         ]);
 
     /**
@@ -84,46 +88,32 @@
      * @param $routeParams
      * @constructor
      */
-    function TrainingQuestionController( quizService, $scope, $routeParams ) {
-
-
-        // Keeping reference on this (scope js)
-        var self = this;
-        var questions = [];
-        var questionIndex = 0;
-        var tags = angular.isArray($routeParams.tags) ? $routeParams.tags : [$routeParams.tags];
-        $scope.question = null;
-
-        reset();
-
-        // Displaying spinner
-        $scope.isOnLoad = true;
+    function QuestionController( quizService, $scope, $routeParams ) {
 
         // *********************************
         // Attributes
         // *********************************
 
+        var questions = [];
+        var questionIndex = 0;
+        var tags = $routeParams.tags !== undefined ? [].concat($routeParams.tags) : [];
+        var isExamination = $routeParams.isExamination == 1;
 
-        // Load all categories
-        quizService
-            .loadQuestions( tags, $routeParams.limit )
-            .then( function( dataQuestions ) {
-                questions = [].concat(dataQuestions);
+        console.log(tags);
 
-                $scope.question = questions[questionIndex];
+        console.log(isExamination);
+        // *********************************
+        // View Attributes
+        // *********************************
 
-                console.log($scope.question);
-                // Hiding spinner
-                $scope.isOnLoad = false;
-            });
-
+        // Displaying spinner
+        $scope.isOnLoad = true;
+        $scope.question = null;
+        $scope.isExamination = isExamination;
 
         // *********************************
-        // Internal methods
+        // View methods
         // *********************************
-        function reset() {
-            $scope.answered = false;
-        }
 
         $scope.showAnswer = function() {
             $scope.answered = true;
@@ -139,8 +129,31 @@
             } else {
                 $scope.question = questions[questionIndex];
             }
+        };
+
+        // *********************************
+        // Internal methods
+        // *********************************
+        function reset() {
+            $scope.answered = false;
         }
 
+        // *********************************
+        // Loading Data
+        // *********************************
+        quizService
+            .loadQuestions( tags, $routeParams.limit )
+            .then( function( dataQuestions ) {
+                questions = [].concat(dataQuestions);
+
+                $scope.question = questions[questionIndex];
+
+                console.log($scope.question);
+                // Hiding spinner
+                $scope.isOnLoad = false;
+            });
+
+        reset();
     }
 
     /**
