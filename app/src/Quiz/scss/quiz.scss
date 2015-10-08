@@ -15,9 +15,7 @@ md-grid-tile {
 .training-theme-selector {
 
   .item-tag-clickable {
-    &.active {
-//      background-color: #F5F5F5;
-    }
+
 
     h3 {
       margin-bottom: 0px;
@@ -34,5 +32,12 @@ md-grid-tile {
     strong {
       color: black;
     }
+  }
+}
+
+.training-question {
+  .correct-answer {
+    background-color: mediumseagreen;
+
   }
 }

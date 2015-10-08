@@ -42,7 +42,7 @@
 
         <md-subheader class="md-no-sticky">Les <strong>{{ questionsCount }}</strong> questions porterons sur les thèmes suivants</md-subheader>
         <md-chips>
-            <md-chip ng-repeat="tag in tags" ng-if="tag.checked">{{ tag.name }}</md-chip>
+            <md-chip ng-repeat="tag in tags" ng-if="tag.checked" class="md-primary-bg md-hue-1">{{ tag.name }}</md-chip>
         </md-chips>
     </md-list>
 

@@ -5,3 +5,7 @@
 md-progress-circular {
   transform: scale(0.3) !important;
 }
+
+[ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
+  display: none !important;
+}

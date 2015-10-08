@@ -13,30 +13,43 @@
             <h3>{{question.title}}</h3>
         </md-list-item>
 
-        <md-list-item ng-repeat="answer in question.answers" class="item-answer-clickable" ng-class="{'active': answer.checked}">
+        <md-list-item
+                ng-repeat="answer in question.answers"
+                class="item-tag-clickable"
+                ng-class="{'correct-answer': isAnswered && answer.is_true}">
 
             <div class="md-list-item-text compact">
                 <h4>{{answer.title}}</h4>
             </div>
 
-            <md-checkbox class="md-secondary" ng-model="answer.checked" aria-label="{{ answer.title }}"></md-checkbox>
+            <md-checkbox
+                    class="md-secondary"
+                    ng-model="answer.checked"
+                    ng-disabled="isAnswered"
+                    aria-label="{{ answer.title }}"></md-checkbox>
         </md-list-item>
 
         <md-divider></md-divider>
+
+        <md-list-item
+            <btf-markdown btf-markdown="question.response" ng-show="isAnswerDisplayed && question.response">
+            </btf-markdown>
+        </md-list>
+
     </md-list>
 
     <div layout="row" layout-align="center center" ng-if="!isOnLoad">
-        <button class="md-raised md-primary md-button md-default-theme" ng-if="question.hint" ng-click="showHint()">
+        <button class="md-raised md-primary md-button md-default-theme" ng-if="question.hint" ng-click="showHint(question.hint)">
             <span class="ng-scope">Besoin d'aide</span>
             <div class="md-ripple-container"></div>
         </button>
 
-        <button class="md-raised  md-button md-default-theme" ng-if="answered || isExamination" ng-click="nextQuestion()">
+        <button class="md-raised  md-button md-default-theme" ng-if="isAnswered || isExamination" ng-click="nextQuestion()">
             <span class="ng-scope">Question suivante</span>
             <div class="md-ripple-container"></div>
         </button>
 
-        <button class="md-warn md-raised md-button md-default-theme" ng-if="!answered && !isExamination" ng-click="showAnswer()">
+        <button class="md-warn md-raised md-button md-default-theme" ng-if="!isAnswered && !isExamination" ng-click="showAnswer()">
             <span class="ng-scope">Voir la réponse</span>
             <div class="md-ripple-container"></div>
         </button>

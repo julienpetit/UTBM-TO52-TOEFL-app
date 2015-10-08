@@ -7,11 +7,11 @@
             TrainingMenuController
         ])
         .controller('TrainingQuestionController', [
-            'quizService', '$scope', '$routeParams',
+            'quizService', '$scope', '$routeParams', '$mdDialog',
             QuestionController
         ])
         .controller('ExaminationQuestionController', [
-            'quizService', '$scope', '$routeParams',
+            'quizService', '$scope', '$routeParams', '$mdDialog',
             QuestionController
         ]);
 
@@ -88,35 +88,34 @@
      * @param $routeParams
      * @constructor
      */
-    function QuestionController( quizService, $scope, $routeParams ) {
+    function QuestionController( quizService, $scope, $routeParams, $mdDialog ) {
 
         // *********************************
         // Attributes
         // *********************************
 
-        var questions = [];
-        var questionIndex = 0;
-        var tags = $routeParams.tags !== undefined ? [].concat($routeParams.tags) : [];
-        var isExamination = $routeParams.isExamination == 1;
+        var questions       = [];
+        var questionIndex   = 0;
+        var tags            = $routeParams.tags !== undefined ? [].concat($routeParams.tags) : [];
+        var isExamination   = $routeParams.isExamination == 1;
 
-        console.log(tags);
-
-        console.log(isExamination);
         // *********************************
         // View Attributes
         // *********************************
 
         // Displaying spinner
-        $scope.isOnLoad = true;
-        $scope.question = null;
-        $scope.isExamination = isExamination;
+        $scope.isOnLoad             = true;
+        $scope.question             = null;
+        $scope.isExamination        = isExamination;
+        $scope.isAnswerDisplayed    = false;
 
         // *********************************
         // View methods
         // *********************************
 
         $scope.showAnswer = function() {
-            $scope.answered = true;
+            $scope.isAnswered           = true;
+            $scope.isAnswerDisplayed    = true;
         };
 
         $scope.nextQuestion = function() {
@@ -131,11 +130,22 @@
             }
         };
 
+        $scope.showHint = function( hint ) {
+            showAlert(
+                $mdDialog,
+                "Aide",
+                hint,
+                "Fermer"
+            );
+        };
+
         // *********************************
         // Internal methods
         // *********************************
+
         function reset() {
-            $scope.answered = false;
+            $scope.isAnswered           = false;
+            $scope.isAnswerDisplayed    = false;
         }
 
         // *********************************

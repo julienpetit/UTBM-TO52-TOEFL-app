@@ -19,13 +19,13 @@ angular
             .icon("phone"      , "./assets/svg/phone.svg"       , 512);
 
 
-        //$mdThemingProvider.definePalette('utbm-blue', $mdThemingProvider.extendPalette('gren', {
-        //
-        //}));
+        $mdThemingProvider.definePalette('utbm-blue', $mdThemingProvider.extendPalette('blue', {
+            '500': '008ECB'
+        }));
 
         // Setting color theme
         $mdThemingProvider.theme('default')
-            .primaryPalette('teal')
+            .primaryPalette('utbm-blue')
             .accentPalette('deep-orange');
 
         // available color : red, pink, purple, deep-purple, indigo, blue, light-blue, cyan, teal, green, light-green, lime, yellow, amber, orange, deep-orange, brown, grey, blue-grey
@@ -33,7 +33,7 @@ angular
 
         // Routing
         $routeProvider
-            .when('/', {
+            .when('/getting-started', {
                 templateUrl: 'src/Layout/views/home.html'
             })
             .when('/training', {
@@ -51,7 +51,9 @@ angular
             .when('/learning/categorie/:categoryId', {
                 templateUrl: 'src/Learning/views/cards.html',
                 controller: 'LearningController'
-            });
+            })
+            .otherwise("/getting-started");
+
             //.when('/layout/:tmpl', {
             //    templateUrl: function(params){
             //        return 'partials/layout-' + params.tmpl + '.tmpl.html';

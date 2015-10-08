@@ -9,13 +9,13 @@
   line-height: 24px;
 }
 
-
 .site-sidenav {
   background: #f6f6f6;
 }
 
 header.nav-header {
-  background: rgb(0,150,136);
+  background: url("../img/material.jpg") center center;
+  background-size: cover;
 }
 
 .site-sidenav md-content {
@@ -106,7 +106,8 @@ header.nav-header {
   padding: 0;
 }
 .docs-menu .md-button.active {
-  background: #F9F9F9;
+  background: #F79837;
+  color: white
 }
 .menu-heading {
   display: block;
