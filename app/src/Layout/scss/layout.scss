@@ -9,3 +9,8 @@ md-progress-circular {
 [ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
   display: none !important;
 }
+
+.whitespace {
+  height: 25px;
+  width: 100%;
+}
