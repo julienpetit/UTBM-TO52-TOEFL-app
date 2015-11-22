@@ -17,8 +17,8 @@
         // Promise-based API
         return {
             loadCards : function( categoryId ) {
-                // Simulate async nature of real remote calls
 
+                // Simulate async nature of real remote calls
                 var def = $q.defer();
 
                 $http.get( appConfig.backend + "/learning/cards/category/" + categoryId)

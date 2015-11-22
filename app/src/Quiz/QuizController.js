@@ -7,12 +7,16 @@
             TrainingMenuController
         ])
         .controller('TrainingQuestionController', [
-            'quizService', '$scope', '$routeParams', '$mdDialog',
+            'quizService', '$scope', '$routeParams', '$mdDialog', '$location',
             QuestionController
         ])
         .controller('ExaminationQuestionController', [
-            'quizService', '$scope', '$routeParams', '$mdDialog',
+            'quizService', '$scope', '$routeParams', '$mdDialog', '$location',
             QuestionController
+        ])
+        .controller('TrainingResultsController', [
+            'quizService', '$scope', '$routeParams', '$mdDialog', '$location',
+            TrainingResultsController
         ]);
 
     /**
@@ -88,7 +92,7 @@
      * @param $routeParams
      * @constructor
      */
-    function QuestionController( quizService, $scope, $routeParams, $mdDialog ) {
+    function QuestionController( quizService, $scope, $routeParams, $mdDialog, $location ) {
 
         // *********************************
         // Attributes
@@ -108,6 +112,12 @@
         $scope.question             = null;
         $scope.isExamination        = isExamination;
         $scope.isAnswerDisplayed    = false;
+        $scope.$parent.menu.currentPage = {
+            name: "Question"
+        };
+
+        updateScopeIndex();
+
 
         // *********************************
         // View methods
@@ -122,9 +132,15 @@
             reset();
 
             questionIndex++;
+            updateScopeIndex();
 
             if( questionIndex >= questions.length ) {
-                console.log("show results");
+
+                quizService.setQuestions( questions );
+
+                // Start training
+                $location.path('/training/results');
+
             } else {
                 $scope.question = questions[questionIndex];
             }
@@ -148,6 +164,10 @@
             $scope.isAnswerDisplayed    = false;
         }
 
+        function updateScopeIndex () {
+            $scope.questionIndex = questionIndex + 1;
+        }
+
         // *********************************
         // Loading Data
         // *********************************
@@ -158,7 +178,8 @@
 
                 $scope.question = questions[questionIndex];
 
-                console.log($scope.question);
+                $scope.totalQuestions = questions.length;
+
                 // Hiding spinner
                 $scope.isOnLoad = false;
             });
@@ -167,6 +188,34 @@
     }
 
     /**
+     *
+     * @param quizService
+     * @param $scope
+     * @param $routeParams
+     * @constructor
+     */
+    function TrainingResultsController( quizService, $scope, $routeParams, $mdDialog, $location ) {
+
+        // *********************************
+        // Attributes
+        // *********************************
+
+        var questions = quizService.getQuestions();
+        var computedQuestions = quizService.computeErrors( questions);
+
+        // *********************************
+        // View Attributes
+        // *********************************
+
+        $scope.questions = computedQuestions.questions;
+        $scope.questionsCount = questions.length;
+        $scope.errorsCount = computedQuestions.errors;
+
+        console.log(questions);
+
+    }
+
+        /**
      *
      * @param $mdDialog
      * @param title
@@ -179,7 +228,7 @@
                 .parent(angular.element(document.querySelector('body')))
                 .clickOutsideToClose(true)
                 .title(title)
-                .content(content)
+                .content("<btf-markdown>" + content + "</btf-markdown>")
                 .ok(btnLabel)
         );
     }

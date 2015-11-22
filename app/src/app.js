@@ -44,6 +44,10 @@ angular
                 templateUrl: 'src/Quiz/views/training-question.html',
                 controller: 'TrainingQuestionController'
             })
+            .when('/training/results', {
+                templateUrl: 'src/Quiz/views/training-results.html',
+                controller: 'TrainingResultsController'
+            })
             .when('/examination', {
                 templateUrl: 'src/Quiz/views/training-question.html',
                 controller: 'ExaminationQuestionController'
@@ -52,6 +56,7 @@ angular
                 templateUrl: 'src/Learning/views/cards.html',
                 controller: 'LearningController'
             })
+
             .otherwise("/getting-started");
 
             //.when('/layout/:tmpl', {

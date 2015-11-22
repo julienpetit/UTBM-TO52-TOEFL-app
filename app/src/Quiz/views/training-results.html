@@ -1,0 +1,60 @@
+
+<div class="training-results">
+
+    <h2>{{ errorsCount }} erreurs sur {{ questionsCount }} questions</h2>
+
+    <div ng-repeat="question in questions" class="md-whiteframe-z1 result-question">
+
+        <md-toolbar class="toolbar-white">
+            <div class="md-toolbar-tools">
+                <h3 class="ng-binding">{{ question.title }}</h3>
+                <span class="flex"></span>
+
+                <button ng-if="!question.isError" class="md-fab md-mini md-button md-green" type="button">
+                    <md-icon md-svg-icon="img/icons/favorite.svg" class="ng-scope ng-isolate-scope" aria-hidden="true"></md-icon>
+                    <div class="md-ripple-container"></div>
+                </button>
+
+                <button ng-if="question.isError" class="md-fab md-mini md-button md-warn" type="button">
+                    <md-icon md-svg-icon="img/icons/favorite.svg" class="ng-scope ng-isolate-scope" aria-hidden="true"></md-icon>
+                    <div class="md-ripple-container"></div>
+                </button>
+
+            </div>
+        </md-toolbar>
+
+        <md-content class="md-padding">
+
+            <md-list-item
+                    ng-repeat="answer in question.answers"
+                    class="item-tag-clickable"
+                    ng-class="{'correct-answer': answer.is_true}">
+
+                <div class="md-list-item-text compact">
+                    <h4>{{answer.title}}</h4>
+                </div>
+
+                <md-checkbox
+                        class="md-secondary"
+                        ng-model="answer.checked"
+                        ng-disabled="true"
+                        aria-label="{{ answer.title }}"></md-checkbox>
+            </md-list-item>
+
+            <md-divider ng-if="question.response"></md-divider>
+
+            <md-list-item
+            <btf-markdown btf-markdown="question.response" ng-show="question.response">
+            </btf-markdown>
+            </md-list>
+
+        </md-content>
+
+
+    </div>
+
+    <a href="" class="md-warn md-raised md-button md-default-theme">Recommencer un exercice</a>
+
+    <div class="whitespace"></div>
+
+</div>

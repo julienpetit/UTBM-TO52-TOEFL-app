@@ -35,10 +35,22 @@ md-grid-tile {
   }
 }
 
-.training-question {
+.training-question,
+.training-results  {
   .correct-answer {
     background-color: mediumseagreen;
 
+  }
+
+}
+
+.training-results {
+  .result-question {
+    margin-bottom: 20px;
+
+    .md-green, .md-green:hover {
+      background-color: mediumseagreen;
+    }
   }
 
 

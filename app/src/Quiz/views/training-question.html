@@ -7,7 +7,12 @@
     </div>
 
     <md-list ng-cloak="" ng-show="!isOnLoad">
-        <md-subheader class="md-no-sticky">Sélectionnez la ou les réponses justes</md-subheader>
+        <md-subheader class="md-no-sticky">
+            Sélectionnez la ou les réponses justes
+
+            <span class="question-counter">{{ questionIndex }} / {{ totalQuestions }}</span>
+
+        </md-subheader>
 
         <md-list-item>
             <h3>{{question.title}}</h3>
@@ -39,7 +44,7 @@
     </md-list>
 
     <div layout="row" layout-align="center center" ng-if="!isOnLoad">
-        <button class="md-raised md-primary md-button md-default-theme" ng-if="question.hint" ng-click="showHint(question.hint)">
+        <button class="md-raised md-primary md-button md-default-theme" ng-if="question.hint && !isExamination" ng-click="showHint(question.hint)">
             <span class="ng-scope">Besoin d'aide</span>
             <div class="md-ripple-container"></div>
         </button>
