@@ -64,16 +64,21 @@
 
                 for( var i = 0; i < questions.length; i++ ) {
                     var boolTruthAnswer = true;
+                    var boolHasBeenCheck = false;
 
                     for ( var j = 0; j < questions[i].answers.length; j++ ) {
                         if ( questions[i].answers[j].checked != undefined && questions[i].answers[j].is_true != questions[i].answers[j].checked ) {
                             boolTruthAnswer = false;
                         }
+
+                        if( questions[i].answers[j].checked == true )
+                            boolHasBeenCheck = true;
+
                     }
 
-                    questions[i].isError = !boolTruthAnswer;
+                    questions[i].isError = !boolTruthAnswer || !boolHasBeenCheck;
 
-                    if ( !boolTruthAnswer )
+                    if ( !boolTruthAnswer || !boolHasBeenCheck )
                         errors++;
 
                 }
