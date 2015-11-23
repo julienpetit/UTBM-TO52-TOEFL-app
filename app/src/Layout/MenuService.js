@@ -16,11 +16,7 @@
 
         var version = {};
 
-        var sections = [{
-            name: 'Commencer',
-            url: '/getting-started',
-            type: 'link'
-        }];
+        var sections = [];
 
         var learningSection = {
             name: 'Cours',

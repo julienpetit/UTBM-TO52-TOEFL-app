@@ -57,7 +57,7 @@ angular
                 controller: 'LearningController'
             })
 
-            .otherwise("/getting-started");
+            .otherwise("/training");
 
             //.when('/layout/:tmpl', {
             //    templateUrl: function(params){

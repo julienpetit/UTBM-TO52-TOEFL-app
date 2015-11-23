@@ -1,1 +1,23 @@
-TEST
+<div layout="row">
+    <div flex>
+        <h2>Taux de réussite</h2>
+    </div>
+    <div flex>
+        <h2>Nombre d'exercices effectué</h2>
+    </div>
+    <div flex hide-sm>
+        <h2>Tags les moins réussi</h2>
+    </div>
+</div>
+
+
+<div layout="row">
+    <div flex>
+        <h2>Entrainement</h2>
+        <div ng-include src="'src/Quiz/views/training-theme-selector.html'" ng-controller="TrainingMenuController"></div>
+
+    </div>
+    <div flex>
+
+    </div>
+</div>
