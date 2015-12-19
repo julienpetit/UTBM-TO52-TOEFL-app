@@ -18,6 +18,7 @@
 
         // Promise-based API
         return {
+
             loadTags : function() {
 
                 var def = $q.defer();
@@ -45,7 +46,7 @@
                         def.resolve(data);
                     })
                     .error(function(){
-                        def.reject("Failed to get tags")
+                        def.reject("Failed to get questions")
                     });
                 return def.promise;
             },
