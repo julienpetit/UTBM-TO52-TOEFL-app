@@ -10,13 +10,13 @@
                 <h3 class="ng-binding">{{ question.title }}</h3>
                 <span class="flex"></span>
 
-                <button ng-if="!question.isError" class="md-fab md-mini md-button md-green" type="button">
-                    <md-icon md-svg-icon="img/icons/favorite.svg" class="ng-scope ng-isolate-scope" aria-hidden="true"></md-icon>
+                <button ng-if="!question.isError" class="md-fab md-mini md-button md-green result-button" type="button">
+                    <ng-md-icon icon="check" ></ng-md-icon>
                     <div class="md-ripple-container"></div>
                 </button>
 
-                <button ng-if="question.isError" class="md-fab md-mini md-button md-warn" type="button">
-                    <md-icon md-svg-icon="img/icons/favorite.svg" class="ng-scope ng-isolate-scope" aria-hidden="true"></md-icon>
+                <button ng-if="question.isError" class="md-fab md-mini md-button md-warn result-button" type="button">
+                    <ng-md-icon icon="clear" ></ng-md-icon>
                     <div class="md-ripple-container"></div>
                 </button>
 

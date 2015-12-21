@@ -407,6 +407,11 @@ md-grid-tile {
   margin-bottom: 20px; }
   .training-results .result-question .md-green, .training-results .result-question .md-green:hover {
     background-color: mediumseagreen; }
+.training-results .md-toolbar-tools {
+  height: 80px;
+  max-height: 80px; }
+  .training-results .md-toolbar-tools h3 {
+    width: 95%; }
 
 #cards {
   position: relative;

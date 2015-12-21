@@ -3,7 +3,7 @@
  */
 angular
     // Importing modules to mainAp
-    .module('mainApp', ['ngMaterial', 'ngRoute', 'btford.markdown'])
+    .module('mainApp', ['ngMaterial', 'ngRoute', 'btford.markdown', 'ngMdIcons'])
 
     // mainApp configuration
     .config(function($mdThemingProvider, $mdIconProvider, $routeProvider){
